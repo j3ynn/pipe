@@ -15,8 +15,9 @@ pipeline {
     )
 
     choice (
-      name: 'G-PACCHETTI',
-      choices: ''
+      name: 'GPACCHETTI',
+      choices: ['apt-get', 'dnf', 'yum', 'apk', 'zypper'],
+      description: 'scelta di gestori pacchetti in base all immagine scelta'
     )
   }
   
@@ -36,7 +37,10 @@ pipeline {
         expression { params.TOOL == 'ansible'}
       }
       steps {
-        echo 'gg'
+        sh """
+          docker exec test-${BUILD_NUMBER} ${params.GPACCHETTI} update
+          docker exec test-${BUILD_NUMBER} ${params.GPACCHETTI} install -y ansible
+        """
       }
     }
   }

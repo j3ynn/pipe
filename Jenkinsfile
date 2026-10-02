@@ -14,8 +14,8 @@ pipeline {
     stage('crea container effimero') {
       steps {
         sh """
-          docker run -d --name c-effimero-${BUILD_NUMBER} --entrypoint sleep ${params.IMAGE} infinity
-          docker ps --filter name=c-effimero-${BUILD_NUMBER} 
+          docker run -d --name test-${BUILD_NUMBER} --entrypoint sleep ${params.IMAGE} infinity
+          docker ps --filter name=test-${BUILD_NUMBER} 
         """
       }
     }

@@ -13,6 +13,11 @@ pipeline {
       choices: ['ansible', 'jenkins', 'nessuno'],
       description: 'scelta per tool all interno del container'
     )
+
+    choice (
+      name: 'G-PACCHETTI',
+      choices: ''
+    )
   }
   
   stages {

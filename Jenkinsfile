@@ -4,7 +4,7 @@ pipeline {
   parameters {
     string (
       name: 'IMAGE',
-      defaultValue: 'eclipse-temurin:17-jre',
+      defaultValue: 'eclipse-temurin:21-jre',
       description: 'immagine docker per container'
     )
 

@@ -50,7 +50,8 @@ pipeline {
       }
       steps {
         sh """
-          echo pippo
+          docker exec test-${BUILD_NUMBER} curl -fsSL -o /opt/jenkins.war https://get.jenkins.io/war-stable/latest/jenkins.war
+          docker exec test-${BUILD_NUMBER} ls -lh /opt/jenkins.war
         """
       }
     }

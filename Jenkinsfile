@@ -4,7 +4,7 @@ pipeline {
   parameters {
     string (
       name: 'IMAGE',
-      defaultValue: 'ubuntu:22.04',
+      defaultValue: 'eclipse-temurin:17-jre',
       description: 'immagine docker per container'
     )
 
@@ -34,12 +34,23 @@ pipeline {
 
     stage('installa ansible') {
       when {
-        expression { params.TOOL == 'ansible'}
+        expression { params.TOOL == 'ansible' }
       }
       steps {
         sh """
           docker exec test-${BUILD_NUMBER} ${params.GPACCHETTI} update
           docker exec test-${BUILD_NUMBER} ${params.GPACCHETTI} install -y ansible
+        """
+      }
+    }
+
+    stage('install jenkins') {
+      when {
+        expression { params.TOOL == 'jenkins' }
+      }
+      steps {
+        sh """
+          echo pippo
         """
       }
     }

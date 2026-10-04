@@ -52,6 +52,9 @@ pipeline {
         sh """
           docker exec test-${BUILD_NUMBER} curl -fsSL -o /opt/jenkins.war https://get.jenkins.io/war-stable/latest/jenkins.war
           docker exec test-${BUILD_NUMBER} ls -lh /opt/jenkins.war
+          docker exec -d test-${BUILD_NUMBER} sh -c 'java -jar /opt/jenkins.war > /tmp/jenkins.log 2>&1'
+          docker exec test-${BUILD_NUMBER} sleep 30
+          docker exec test-${BUILD_NUMBER} cat /tmp/jenkins.log
         """
       }
     }
